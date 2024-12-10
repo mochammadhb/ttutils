@@ -1,0 +1,20 @@
+{
+  "name": "my-tiktok-app",
+  "version": "1.0.0",
+  "description": "A TikTok data showcase application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",   // Menjalankan aplikasi secara lokal
+    "build": "echo 'No build step required for now.'" // Tidak perlu build jika menggunakan serverless
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.10" // Jika Anda ingin melakukan scraping lebih lanjut, jika diperlukan
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "14.x"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
