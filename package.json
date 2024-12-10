@@ -1,20 +1,19 @@
 {
-  "name": "my-tiktok-app",
+  "name": "tiktok-utilities",
   "version": "1.0.0",
-  "description": "A TikTok data showcase application",
+  "description": "TikTok Utilities using serverless functions",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",   // Menjalankan aplikasi secara lokal
-    "build": "echo 'No build step required for now.'" // Tidak perlu build jika menggunakan serverless
+    "start": "netlify dev",
+    "build": "echo 'No build needed'",
+    "deploy": "netlify deploy"
   },
   "dependencies": {
-    "axios": "^0.21.1",
-    "cheerio": "^1.0.0-rc.10" // Jika Anda ingin melakukan scraping lebih lanjut, jika diperlukan
+    "axios": "^1.3.0",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.0.0"
   },
-  "devDependencies": {},
-  "engines": {
-    "node": "14.x"
-  },
-  "author": "Your Name",
-  "license": "MIT"
+  "devDependencies": {
+    "netlify-cli": "^3.10.0"
+  }
 }
