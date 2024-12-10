@@ -65,7 +65,7 @@
 
 <body>
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Tiktok Utilities</h1>
+        <h1 class="text-center mb-4">TikTok Utilities</h1>
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="mb-3">
@@ -114,32 +114,13 @@
             document.getElementById('errorMessage').style.display = 'none';
 
             try {
-                const targetURL = `https://www.tiktok.com/@${username}`;
-                const response = await fetch(targetURL);
-                const html = await response.text();
+                const response = await fetch(`/api/tiktokInfo?username=${username}`);
+                const data = await response.json();
 
-                // Parsing HTML
-                const scriptContent = html.match(/<script id="__UNIVERSAL_DATA_FOR_REHYDRATION__1"[^>]*>([\s\S]*?)<\/script>/);
-                if (scriptContent && scriptContent[1]) {
-                    const jsonData = JSON.parse(scriptContent[1]);
-                    const uid = jsonData.__DEFAULT_SCOPE__?.['webapp.user-detail']?.userInfo.user;
-                    if (uid) {
-                        // Fetch creator info from API
-                        const apiURL = `https://oec22-normal-alisg.tokopediax.com/api/showcase/v1/creator_info/get?creator_uid=${uid.id}&aid=1988`;
-                        const apiResponse = await fetch(apiURL);
-                        const apiData = await apiResponse.json();
-
-                        if (apiData?.data?.data?.creator_info) {
-                            const creatorInfo = apiData.data.data.creator_info;
-                            displayResult(creatorInfo);
-                        } else {
-                            showError('No showcase information available for this account!');
-                        }
-                    } else {
-                        showError('UID not found in TikTok JSON!');
-                    }
+                if (response.ok) {
+                    displayResult(data);
                 } else {
-                    showError('Unable to find TikTok data for this username!');
+                    showError(data.error || 'Failed to fetch data!');
                 }
             } catch (error) {
                 showError(error.message || 'An error occurred while fetching data!');
